@@ -1,0 +1,150 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+
+{% block introHeader %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>{{ SiteInformation.description }}</h1>
+                    <hr class="intro-divider">
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <a  name="informatica"></a>
+    <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Informática</h2>
+                    <p class="lead">Estos son algunos de nuestro productos.</p>
+                    <p>
+                        <table>
+                            {% for Product in Products['informatica'] %}
+                                <tr><td><a role="button" data-toggle="product" href="/details/{{ Product.id }}">{{ Product.name }}</a></td></tr>
+                            {% endfor %}
+                        </table>
+                    </p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="/bundles/acmedemo/img/ipad.png" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a  name="audiovideo"></a>
+    <div class="content-section-b">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Audio y Video</h2>
+                    <p class="lead">Estos son algunos de nuestros productos</p>
+                    <p>
+                    <table>
+                        {% for Product in Products['audiovideo'] %}
+                            <tr><td><a role="button" data-toggle="product" href="/details/{{ Product.id }}">{{ Product.name }}</a></td></tr>
+                        {% endfor %}
+                    </table>
+                    </p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="/bundles/acmedemo/img/beats.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a  name="deportes"></a>
+    <div class="content-section-c">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Deportes</h2>
+                    <p class="lead">Estos son algunos de nuestros productos</p>
+                    <p>
+                    <table>
+                        {% for Product in Products['deportes'] %}
+                            <tr><td><a role="button" data-toggle="product" href="/details/{{ Product.id }}">{{ Product.name }}</a></td></tr>
+                        {% endfor %}
+                    </table>
+                    </p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="/bundles/acmedemo/img/puma.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a  name="hogar"></a>
+    <div class="content-section-d">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Hogar</h2>
+                    <p class="lead">Estos son algunos de nuestros productos</p>
+                    <p>
+                    <table>
+                        {% for Product in Products['hogar'] %}
+                            <tr><td><a role="button" data-toggle="product" href="/details/{{ Product.id }}">{{ Product.name }}</a></td></tr>
+                        {% endfor %}
+                    </table>
+                    </p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="/bundles/acmedemo/img/estufa.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a  name="contact"></a>
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Contact us</h2>
+                </div>
+                <div class="col-lg-6">
+                    {{ form_start(ContactForm) }}
+                    {{ form_widget(ContactForm) }}
+                    {{ form_end(ContactForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $('[data-toggle="product"]').click(function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            if (url.indexOf('#') == 0) {
+                $(url).modal('open');
+            } else {
+                $.get(url, function(data) {
+                    $('<div class="modal fade">' + data + '</div>').modal();
+                });
+            }
+        });
+    </script>
+{% endblock %}
